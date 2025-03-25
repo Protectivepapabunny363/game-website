@@ -6,8 +6,7 @@
     <title>PlayerPilot v. 1.0</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
-
-
+    
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <script>
         window.RufflePlayer = window.RufflePlayer || {};
@@ -17,37 +16,11 @@
         };
     </script>
     <script src="ruffle/ruffle.js"></script>
-
-    <!-- Start workaround -->
-    <script>
-        const swfobject = {};
-    </script>
-    <script>
-        Object.defineProperty(swfobject, "embedSWF", {
-            value: function() {
-                var ruffle = window.RufflePlayer.newest();
-                var player = ruffle.create_player();
-                var container = document.getElementById(arguments[1]);
-                container.innerHTML = "";
-                container.style.width = arguments[2] + "px";
-                container.style.height = arguments[3] + "px";
-                player.style.width = container.style.width;
-                player.style.height = container.style.height;
-                container.appendChild(player);
-                player.stream_swf_url(arguments[0]); 
-            },
-            writable: false,
-            configurable: false
-        });
-    </script>
-    <!-- End workaround - This code also works if placed before <swfobject.js> -->
-
-    <script src="swfobject.js"></script>
 </head>
 <body>
     <header>
         <h1>PlayerPilot</h1>
-        <h3>Your Ultimate Gaming Hub</p>
+        <h3>Your Ultimate Gaming Hub</h3>
     </header>
     
     <nav>
@@ -60,39 +33,104 @@
     <main>
         <section id="featured">
             <h2>Featured Game</h2>
-            <div class="game-card">
+            <div class="featured-game">
                 <img src="featured-game.jpg" alt="Featured Game">
                 <h3>GAME FEATURED</h3>
                 <p>Top Featured Game</p>
+
+
+            <!-- <script>
+                    const gameChoices = [
+                        "PapaLouie2.swf", "PapaLouie3.swf", "cactusmccoy.swf", "cactusmccoy2.swf",
+                        "jacksmith.swf", "papalouie_v2.swf", "papasbakeria.swf", "papascupcakeria.swf",
+                        "papasdonuteria.swf", "papasfreezeria.swf", "papashotdoggeria.swf", "papaspancakeria.swf",
+                        "papaspastaria.swf", "papasscooperia_v102.swf", "papassushiria.swf", "papastacomia.swf",
+                        "papaswingeria.swf", "rockgarden_v2.swf", "snjmidnightmarch.swf", "steakandjake_freeversion.swf"
+                    ];
+
+                    const gameChoiceLabels = [
+                        "Papa Louie 2", "Papa Louie 3", "Cactus McCoy", "Cactus McCoy 2",
+                        "JackSmith", "Papa Louie: When Pizzas Attack", "Papa's Bakeria", "Papa's Cupcakeria",
+                        "Papa's Donuteria", "Papa's Freezeria", "Papa's Hot Doggeria", "Papa's Pancakeria",
+                        "Papa's Pastaria", "Papa's Scooperia", "Papa's Sushiria", "Papa's Taco Mia",
+                        "Papa's Wingeria", "Rock Garden", "Steak and Jake: Midnight March", "Steak and Jake"
+                    ];
+
+                    var i = Math.floor(Math.random() * gameChoices.length);
+
+                    const gameDiv = document.createElement("div");
+                    gameDiv.classList.add("game-card");
+                        
+                    const img = document.createElement("img");
+                    img.src = `images/${games[i].replace(".swf", ".jpg")}`;
+                    img.alt = games[i];
+                    img.classList.add("game-image");
+                        
+                    const title = document.createElement("h3");
+                    title.textContent = gameLabels[i];
+                        
+                    gameDiv.appendChild(img);
+                    gameDiv.appendChild(title);
+                    gridContainer.appendChild(gameDiv);
+                    
+                    document.getElementById("toggle-grid").addEventListener("click", function() {
+                        gridContainer.classList.toggle("grid-expanded");
+                        this.textContent = gridContainer.classList.contains("grid-expanded") ? "Shrink Grid" : "Expand Grid";
+                    });
+                </script> -->
+
                 <button>Play Now</button>
             </div>
         </section>
         
         <section id="games">
             <h2>Games You'll Enjoy</h2>
-            <div class="game-list">
-                <div class="game-card">
-                    <div id="file_div1">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("cactusmccoy.swf", "file_div1", "550", "400", "8"); </script>
-                    <h3>Cactus McCoy</h3>
-                    <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                    <div id="file_div2">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("cactusmccoy2.swf", "file_div2", "550", "400", "8"); </script>
-                    <h3>Cactus McCoy 2</h3>
-                    <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                    <div id="file_div3">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("jacksmith.swf", "file_div3", "550", "400", "8"); </script>
-                    <h3>Jacksmith</h3>
-                    <p>insert description here</p>
-                </div>                
+            <button id="toggle-grid">Expand Grid</button>
+            <div id="game-grid" class="grid grid-compact">
+                <script>
+                    const games = [
+                        "PapaLouie2.swf", "PapaLouie3.swf", "cactusmccoy.swf", "cactusmccoy2.swf",
+                        "jacksmith.swf", "papalouie_v2.swf", "papasbakeria.swf", "papascupcakeria.swf",
+                        "papasdonuteria.swf", "papasfreezeria.swf", "papashotdoggeria.swf", "papaspancakeria.swf",
+                        "papaspastaria.swf", "papasscooperia_v102.swf", "papassushiria.swf", "papastacomia.swf",
+                        "papaswingeria.swf", "rockgarden_v2.swf", "snjmidnightmarch.swf", "steakandjake_freeversion.swf"
+                    ];
+
+                    const gameLabels = [
+                        "Papa Louie 2", "Papa Louie 3", "Cactus McCoy", "Cactus McCoy 2",
+                        "JackSmith", "Papa Louie: When Pizzas Attack", "Papa's Bakeria", "Papa's Cupcakeria",
+                        "Papa's Donuteria", "Papa's Freezeria", "Papa's Hot Doggeria", "Papa's Pancakeria",
+                        "Papa's Pastaria", "Papa's Scooperia", "Papa's Sushiria", "Papa's Taco Mia",
+                        "Papa's Wingeria", "Rock Garden", "Steak and Jake: Midnight March", "Steak and Jake"
+                    ];
+                    
+                    const gridContainer = document.getElementById("game-grid");
+                    for (var i = 0; i < games.length; i++) {
+                        const gameDiv = document.createElement("div");
+                        gameDiv.classList.add("game-card");
+                        
+                        const img = document.createElement("img");
+                        img.src = `images/${games[i].replace(".swf", ".jpg")}`;
+                        img.alt = games[i];
+                        img.classList.add("game-image");
+                        
+                        const title = document.createElement("h3");
+                        title.textContent = gameLabels[i];
+                        
+                        gameDiv.appendChild(img);
+                        gameDiv.appendChild(title);
+                        gridContainer.appendChild(gameDiv);
+                    };
+                    
+                    document.getElementById("toggle-grid").addEventListener("click", function() {
+                        gridContainer.classList.toggle("grid-expanded");
+                        this.textContent = gridContainer.classList.contains("grid-expanded") ? "Shrink Grid" : "Expand Grid";
+                    });
+                </script>
             </div>
         </section>
     </main>
-    
+
     <section id="about">
         <h2>About PlayerPilot</h2>
         <p>PlayerPilot's mission is to make gaming a better experience for everyone! Regardless if you're a casual gamer or a hardcore player,
@@ -110,7 +148,7 @@
             <button type="submit">Send Message</button>
         </form>
     </section>
-    
+
     <footer>
         <p>&copy; 2025 PlayerPilot v. 1.0. All Rights Reserved.</p>
     </footer>
