@@ -1,1 +1,1 @@
-test
+IMPORTANT!!! Make sure you upload the .bin file.
