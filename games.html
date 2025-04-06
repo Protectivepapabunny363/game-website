@@ -1,173 +1,72 @@
-<!-- As of March 11th, 2025, here are some of our game ideas
-  - Connect 4          - Guess the ______        - _____ Escape
-  - Tic Tac Toe        - Chess & Checkers        - Four Corners Adventure
-  - Battleship         - 
-
--->
-
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayerPilot v. 1.0</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
-
-
+    <title>PlayerPilot - Game</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-    <script>
-        window.RufflePlayer = window.RufflePlayer || {};
-        window.RufflePlayer.config = {
-            "public_path": "ruffle/",
-            "polyfills": ["static-content", "plugin-detect", "dynamic-content"]
-        };
-    </script>
-    <script src="ruffle/ruffle.js"></script>
-
-    <script>
-        const swfobject = {};
-    </script>
-    <script>
-        Object.defineProperty(swfobject, "embedSWF", {
-            value: function() {
-                var ruffle = window.RufflePlayer.newest();
-                var player = ruffle.create_player();
-                var container = document.getElementById(arguments[1]);
-                container.innerHTML = "";
-                container.style.width = arguments[2] + "px";
-                container.style.height = arguments[3] + "px";
-                player.style.width = container.style.width;
-                player.style.height = container.style.height;
-                container.appendChild(player);
-                player.stream_swf_url(arguments[0]);
-            },
-            writable: false,
-            configurable: false
-        });
-    </script>
-
-    <script src="swfobject.js"></script>
+    <script src="main.js"></script>
+    <style>
+        .game-view {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .back-button {
+            display: inline-block;
+            margin-left: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>PlayerPilot</h1>
-        <h3>Your Ultimate Gaming Hub</p>
+        <a href="home.html" class="back-button">← Back to Games</a>
     </header>
     
     <main>
-
-        <section id="games">
-            <h2>Games You'll Enjoy</h2>
-            <div class="game-list">
-                <div class="game-card">
-                    <div id="file_div">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("cactusmccoy.swf", "file_div", "550", "400", "8"); </script>
-                    <h3>Cactus McCoy</h3>
-                    <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                    <div id="file_div">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("cactusmccoy2.swf", "file_div", "550", "400", "8"); </script>
-                    <h3>Cactus McCoy 2</h3>
-                    <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                    <div id="file_div">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("jacksmith.swf", "file_div", "550", "400", "8"); </script>
-                    <h3>Jacksmith</h3>
-                    <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                    <div id="file_div">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("papalouie_v2.swf", "file_div", "550", "400", "8"); </script>
-                    <h3>Papa Louie V2</h3>
-                    <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                    <div id="file_div">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("papasbakeria.swf", "file_div", "550", "400", "8"); </script>
-                    <h3>Papa's Bakeria</h3>
-                    <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                    <div id="file_div">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("papascupcakeria.swf", "file_div", "550", "400", "8"); </script>
-                    <h3>Papa's Cupcakeria</h3>
-                    <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                    <div id="file_div">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("papasdonuteria.swf", "file_div", "550", "400", "8"); </script>
-                    <h3>Papa's Donuteria</h3>
-                    <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                    <div id="file_div">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("papasfreezeria.swf", "file_div", "550", "400", "8"); </script>
-                    <h3>Papa's Freezeria</h3>
-                    <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                    <div id="file_div">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("jacksmith.swf", "file_div", "550", "400", "8"); </script>
-                    <h3>Jacksmith</h3>
-                    <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                    <div id="file_div">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("cactusmccoy.swf", "file_div", "550", "400", "8"); </script>
-                    <h3>Cactus McCoy</h3>
-                    <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                    <div id="file_div">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("cactusmccoy2.swf", "file_div", "550", "400", "8"); </script>
-                    <h3>Cactus McCoy 2</h3>
-                    <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                    <div id="file_div">Flash Player not detected!</div>
-                    <script> swfobject.embedSWF("jacksmith.swf", "file_div", "550", "400", "8"); </script>
-                    <h3>Jacksmith</h3>
-                    <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                  <div id="file_div">Flash Player not detected!</div>
-                  <script> swfobject.embedSWF("jacksmith.swf", "file_div", "550", "400", "8"); </script>
-                  <h3>Jacksmith</h3>
-                  <p>insert description here</p>
-                </div>
-                <div class="game-card">
-                  <div id="file_div">Flash Player not detected!</div>
-                  <script> swfobject.embedSWF("jacksmith.swf", "file_div", "550", "400", "8"); </script>
-                  <h3>Jacksmith</h3>
-                  <p>insert description here</p>
-                </div>
-            </div>
-        </section>
+        <div id="game-container" class="game-view"></div>
     </main>
-    
-    <section id="about">
-        <h2>About PlayerPilot</h2>
-        <p>PlayerPilot's mission is to make gaming a better experience for everyone! Regardless if you're a casual gamer or a hardcore player,
-        you will certainly enjoy PlayerPilot's tailored user experience. You're in command of your gaming journey when you play on PlayerPilot.
-        Come have fun with us and let the adventure begin!</p>
-    </section>
-    
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <p>Have any questions or suggestions? Reach out to us!</p>
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
-    
+
     <footer>
         <p>&copy; 2025 PlayerPilot v. 1.0. All Rights Reserved.</p>
     </footer>
+
+    <script>
+        // Get game parameter from URL
+        function getGameFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('game');
+        }
+        
+        // Load the game when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            const gameFile = getGameFromURL();
+            if (gameFile) {
+                const ruffle = window.RufflePlayer.newest();
+                const player = ruffle.createPlayer();
+                player.style.width = "800px";
+                player.style.height = "600px";
+                player.style.maxWidth = "100%";
+                
+                const container = document.getElementById("game-container");
+                container.appendChild(player);
+                
+                player.load(`games/${gameFile}`).then(() => {
+                    document.title = `PlayerPilot - ${gameFile.replace('.swf', '')}`;
+                }).catch(error => {
+                    console.error("Error loading game:", error);
+                    container.innerHTML = `<p>Error loading game. Please try again.</p>`;
+                });
+            } else {
+                document.getElementById("game-container").innerHTML = 
+                    `<p>No game specified. Please select a game from the home page.</p>`;
+            }
+        });
+    </script>
 </body>
-</html> -->
+</html>
