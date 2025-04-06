@@ -6,21 +6,66 @@
     <title>PlayerPilot v. 1.0</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
-    
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-    <script>
-        window.RufflePlayer = window.RufflePlayer || {};
-        window.RufflePlayer.config = {
-            "public_path": "ruffle/",
-            "polyfills": ["static-content", "plugin-detect", "dynamic-content"]
-        };
-    </script>
-    <script src="ruffle/ruffle.js"></script>
+    <script src="main.js"></script>
+    <style>
+        .auth-section {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .auth-section input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            border-radius: 5px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>PlayerPilot</h1>
         <h3>Your Ultimate Gaming Hub</h3>
+        
+        <div id="login-section" class="auth-section">
+            <input type="text" id="login-username" placeholder="Username">
+            <input type="password" id="login-password" placeholder="Password">
+            <button onclick="login()">Login</button>
+            <button onclick="showRegisterModal()">Register</button>
+        </div>
+        
+        <div id="user-section" class="auth-section" style="display:none">
+            <span id="user-greeting"></span>
+            <span id="user-streak"></span>
+            <button onclick="logout()">Logout</button>
+        </div>
     </header>
     
     <nav>
@@ -33,53 +78,8 @@
     <main>
         <section id="featured">
             <h2>Featured Game</h2>
-            <div class="featured-game">
-                <img src="featured-game.jpg" alt="Featured Game">
-                <h3>GAME FEATURED</h3>
-                <p>Top Featured Game</p>
-
-
-            <!-- <script>
-                    const gameChoices = [
-                        "PapaLouie2.swf", "PapaLouie3.swf", "cactusmccoy.swf", "cactusmccoy2.swf",
-                        "jacksmith.swf", "papalouie_v2.swf", "papasbakeria.swf", "papascupcakeria.swf",
-                        "papasdonuteria.swf", "papasfreezeria.swf", "papashotdoggeria.swf", "papaspancakeria.swf",
-                        "papaspastaria.swf", "papasscooperia_v102.swf", "papassushiria.swf", "papastacomia.swf",
-                        "papaswingeria.swf", "rockgarden_v2.swf", "snjmidnightmarch.swf", "steakandjake_freeversion.swf"
-                    ];
-
-                    const gameChoiceLabels = [
-                        "Papa Louie 2", "Papa Louie 3", "Cactus McCoy", "Cactus McCoy 2",
-                        "JackSmith", "Papa Louie: When Pizzas Attack", "Papa's Bakeria", "Papa's Cupcakeria",
-                        "Papa's Donuteria", "Papa's Freezeria", "Papa's Hot Doggeria", "Papa's Pancakeria",
-                        "Papa's Pastaria", "Papa's Scooperia", "Papa's Sushiria", "Papa's Taco Mia",
-                        "Papa's Wingeria", "Rock Garden", "Steak and Jake: Midnight March", "Steak and Jake"
-                    ];
-
-                    var i = Math.floor(Math.random() * gameChoices.length);
-
-                    const gameDiv = document.createElement("div");
-                    gameDiv.classList.add("game-card");
-                        
-                    const img = document.createElement("img");
-                    img.src = `images/${games[i].replace(".swf", ".jpg")}`;
-                    img.alt = games[i];
-                    img.classList.add("game-image");
-                        
-                    const title = document.createElement("h3");
-                    title.textContent = gameLabels[i];
-                        
-                    gameDiv.appendChild(img);
-                    gameDiv.appendChild(title);
-                    gridContainer.appendChild(gameDiv);
-                    
-                    document.getElementById("toggle-grid").addEventListener("click", function() {
-                        gridContainer.classList.toggle("grid-expanded");
-                        this.textContent = gridContainer.classList.contains("grid-expanded") ? "Shrink Grid" : "Expand Grid";
-                    });
-                </script> -->
-
-                <button>Play Now</button>
+            <div class="featured-game" id="featured-game-container">
+                <!-- Will be filled by JavaScript -->
             </div>
         </section>
         
@@ -87,60 +87,18 @@
             <h2>Games You'll Enjoy</h2>
             <button id="toggle-grid">Expand Grid</button>
             <div id="game-grid" class="grid grid-compact">
-                <script>
-                    const games = [
-                        "PapaLouie2.swf", "PapaLouie3.swf", "cactusmccoy.swf", "cactusmccoy2.swf",
-                        "jacksmith.swf", "papalouie_v2.swf", "papasbakeria.swf", "papascupcakeria.swf",
-                        "papasdonuteria.swf", "papasfreezeria.swf", "papashotdoggeria.swf", "papaspancakeria.swf",
-                        "papaspastaria.swf", "papasscooperia_v102.swf", "papassushiria.swf", "papastacomia.swf",
-                        "papaswingeria.swf", "rockgarden_v2.swf", "snjmidnightmarch.swf", "steakandjake_freeversion.swf"
-                    ];
-
-                    const gameLabels = [
-                        "Papa Louie 2", "Papa Louie 3", "Cactus McCoy", "Cactus McCoy 2",
-                        "JackSmith", "Papa Louie: When Pizzas Attack", "Papa's Bakeria", "Papa's Cupcakeria",
-                        "Papa's Donuteria", "Papa's Freezeria", "Papa's Hot Doggeria", "Papa's Pancakeria",
-                        "Papa's Pastaria", "Papa's Scooperia", "Papa's Sushiria", "Papa's Taco Mia",
-                        "Papa's Wingeria", "Rock Garden", "Steak and Jake: Midnight March", "Steak and Jake"
-                    ];
-                    
-                    const gridContainer = document.getElementById("game-grid");
-                    for (var i = 0; i < games.length; i++) {
-                        const gameDiv = document.createElement("div");
-                        gameDiv.classList.add("game-card");
-                        
-                        const img = document.createElement("img");
-                        img.src = `images/${games[i].replace(".swf", ".jpg")}`;
-                        img.alt = games[i];
-                        img.classList.add("game-image");
-                        
-                        const title = document.createElement("h3");
-                        title.textContent = gameLabels[i];
-                        
-                        gameDiv.appendChild(img);
-                        gameDiv.appendChild(title);
-                        gridContainer.appendChild(gameDiv);
-                    };
-                    
-                    document.getElementById("toggle-grid").addEventListener("click", function() {
-                        gridContainer.classList.toggle("grid-expanded");
-                        this.textContent = gridContainer.classList.contains("grid-expanded") ? "Shrink Grid" : "Expand Grid";
-                    });
-                </script>
+                <!-- Will be filled by JavaScript -->
             </div>
         </section>
     </main>
 
     <section id="about">
         <h2>About PlayerPilot</h2>
-        <p>PlayerPilot's mission is to make gaming a better experience for everyone! Regardless if you're a casual gamer or a hardcore player,
-        you will certainly enjoy PlayerPilot's tailored user experience. You're in command of your gaming journey when you play on PlayerPilot.
-        Come have fun with us and let the adventure begin!</p>
+        <p>At PlayerPilot, our mission is to preserve and revive the joy of classic online gaming by providing a seamless and accessible platform to play SWF-based games through Ruffle emulation. We empower players to relive nostalgic gaming experiences without barriers—offering an easy-to-use, sign-up enabled space where community and fun come first. Whether you're revisiting old favorites or discovering new ones, PlayerPilot ensures that great games never fade away.</p>
     </section>
     
     <section id="contact">
         <h2>Contact Us</h2>
-        <p>Have any questions or suggestions? Reach out to us!</p>
         <form>
             <input type="text" placeholder="Your Name" required>
             <input type="email" placeholder="Your Email" required>
@@ -148,6 +106,18 @@
             <button type="submit">Send Message</button>
         </form>
     </section>
+
+    <!-- Registration Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="hideRegisterModal()">&times;</span>
+            <h2>Register</h2>
+            <input type="text" id="register-username" placeholder="Username" required>
+            <input type="email" id="register-email" placeholder="Email (optional)">
+            <input type="password" id="register-password" placeholder="Password" required>
+            <button onclick="register()">Register</button>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2025 PlayerPilot v. 1.0. All Rights Reserved.</p>
