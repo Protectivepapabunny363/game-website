@@ -1,57 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayerPilot Start Page</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="main.js"></script>
-    <style>
-        @keyframes slideBackground {
-            0% { background-position: 0 0; }
-            100% { background-position: -1000px 0; }
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PlayerPilot Start Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Press Start 2P', cursive;
-            text-align: center;
-            background: url('retro-background.png');
-            background-size: cover;
-            animation: slideBackground 10s linear infinite;
-            color: #00ff00;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .logo {
-            width: 300px;
-            margin-bottom: 50px;
-        }
+    body {
+      font-family: 'Press Start 2P', cursive;
+      background: url('images/red-glitch.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: #ff004c;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-shadow: 0 0 10px #ff0000, 0 0 20px #ff004c;
+      cursor: url('images/pixel-sword.cur'), auto;
+    }
 
-        .start-button {
-            background-color: #00ff00;
-            border: 3px solid #004400;
-            color: black;
-            padding: 20px 40px;
-            font-size: 20px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
+    .logo {
+      width: 350px;
+      margin-bottom: 60px;
+      filter: drop-shadow(0 0 20px #ff0000);
+      animation: pulse 2s infinite alternate;
+    }
 
-        .start-button:hover {
-            background-color: #004400;
-            color: #00ff00;
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    @keyframes pulse {
+      0% { transform: scale(1); filter: drop-shadow(0 0 10px #ff0000); }
+      100% { transform: scale(1.05); filter: drop-shadow(0 0 30px #ff004c); }
+    }
+
+    .start-button {
+      background: black;
+      border: 4px solid #ff0000;
+      padding: 20px 50px;
+      font-size: 16px;
+      color: #ff0000;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .start-button:hover {
+      background: #ff0000;
+      color: black;
+      box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+    }
+
+    .start-button::before,
+    .start-button::after {
+      content: 'PRESS START';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      opacity: 0.8;
+      z-index: -1;
+    }
+
+    .start-button::before {
+      top: -2px;
+      left: 2px;
+      color: #ff00ff;
+      animation: glitch 1s infinite;
+    }
+
+    .start-button::after {
+      top: 2px;
+      left: -2px;
+      color: #00ffff;
+      animation: glitch 1s infinite reverse;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, -2px); }
+      60% { transform: translate(-1px, 1px); }
+      80% { transform: translate(1px, -1px); }
+      100% { transform: translate(0); }
+    }
+
+    .noise, .crt-lines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    .noise {
+      background-image: url('images/noise.png');
+      opacity: 0.04;
+    }
+
+    .crt-lines {
+      background: repeating-linear-gradient(
+        transparent,
+        transparent 2px,
+        rgba(255, 0, 0, 0.03) 3px
+      );
+    }
+
+    .music-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.6);
+      border: 2px solid #ff0000;
+      color: #ff0000;
+      font-size: 20px;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 9999;
+    }
+  </style>
 </head>
 <body>
-    <img src="images/playerpilot-logo.png" alt="PlayerPilot Logo" class="logo">
-    <button class="start-button" onclick="location.href='home.html'">PRESS START</button>
+
+  <audio id="bg-music" autoplay loop>
+    <source src="audio/gamer-beat.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <img src="images/playerpilot-logo.png" alt="PlayerPilot Logo" class="logo">
+  <button class="start-button" onclick="location.href='home.html'">PRESS START</button>
+
+  <button class="music-toggle" onclick="toggleMusic()">🎵</button>
+
+  <div class="noise"></div>
+  <div class="crt-lines"></div>
+
+  <script>
+    function toggleMusic() {
+      const music = document.getElementById('bg-music');
+      music.muted = !music.muted;
+    }
+  </script>
 </body>
 </html>
