@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayerPilot v. 1.0</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- End workaround - This code also works if placed before <swfobject.js> -->
+
+</head>
+<body>
+    <script src="ruffle/ruffle.js"></script>
+
+    <header>
+        <h1>PlayerPilot</h1>
+        <h3>Your Ultimate Gaming Hub</p>
+    </header>
+    <div id='ruffle'></div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#games">Games</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    
+    <main>
+        <section id="featured">
+            <h2>Featured Game</h2>
+            <div class="game-card">
+                <img src="featured-game.jpg" alt="Featured Game">
+                <h3>GAME FEATURED</h3>
+                <p>Top Featured Game</p>
+                <button>Play Now</button>
+            </div>
+        </section>
+        
+        <section id="games">
+            <h2>Games You'll Enjoy</h2>
+            <div class="game-list">
+                <div class="game-card">
+                    <div id="file_div">Flash Player not detected!</div>
+                    <object width="500" height="400"> 
+                        <param name="movie" value="/swf/PapaLouie2.swf"> 
+                        <embed src="/swf/PapaLouie2.swf" width="500" height="400"> 
+                        </embed> 
+                    </object> 
+                    <script>// swfobject.embedSWF("cactusmccoy.swf", "file_div", "550", "400", "8"); </script>
+                    <h3>Cactus McCoy</h3>
+                    <p>insert description here</p>
+                </div>
+                <div class="game-card">
+                    <script> //swfobject.embedSWF("cactusmccoy2.swf", "file_div", "550", "400", "8"); </script>
+                    <h3>Cactus McCoy 2</h3>
+                    <p>insert description here</p>
+                </div>
+                <div class="game-card">
+                    <script> //swfobject.embedSWF("jacksmith.swf", "file_div", "550", "400", "8"); </script>
+                    <h3>Jacksmith</h3>
+                    <p>insert description here</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <section id="about">
+        <h2>About PlayerPilot</h2>
+        <p>PlayerPilot's mission is to make gaming a better experience for everyone! Regardless if you're a casual gamer or a hardcore player,
+        you will certainly enjoy PlayerPilot's tailored user experience. You're in command of your gaming journey when you play on PlayerPilot.
+        Come have fun with us and let the adventure begin!</p>
+    </section>
+    
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Have any questions or suggestions? Reach out to us!</p>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 PlayerPilot v. 1.0. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
